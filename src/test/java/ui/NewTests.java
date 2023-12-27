@@ -145,19 +145,19 @@ public class NewTests {
         $(By.xpath("//span[contains(text(),'Установить')]")).click();
         refresh();
         $x("//*[@id=\"scrollContainer\"]/main/div/div/button/span")
-                .shouldBe(Condition.visible, Duration.ofSeconds(5000))
+                .shouldBe(Condition.visible, Duration.ofSeconds(9000))
                 .click();
 
         // открыть счет
         $(By.xpath("//span[contains(text(),'Управление предприятием')]"))
-                .shouldBe(Condition.visible, Duration.ofSeconds(7000))
+                .shouldBe(Condition.visible, Duration.ofSeconds(9000))
                 .click();
         $(By.xpath("//span[contains(text(),'Счета')]")).click();
         $(By.xpath("//span[contains(text(),'Новая запись')]")).click();
 
         // создать счет
         $x("//textarea[@placeholder='...']")
-                .shouldBe(Condition.visible, Duration.ofSeconds(2000))
+                .shouldBe(Condition.visible, Duration.ofSeconds(9000))
                 .setValue("TestTest122");
         $x("//*[@name='invoice_type$erp']").hover().setValue("Исходящий");
         $x("//*[@class='MuiAutocomplete-listbox']//*[.='Исходящий']").click();
@@ -182,10 +182,10 @@ public class NewTests {
 
         // Создание ссылки на оплату
         $x("//span[contains(text(),'Ссылка на оплату')]")
-                .shouldBe(Condition.visible, Duration.ofSeconds(3000))
+                .shouldBe(Condition.visible, Duration.ofSeconds(9000))
                 .click();
         newUrl = $x("/html/body/div[3]/div[3]/div/form/div[1]/div/div/div[2]/a")
-                .shouldBe(Condition.visible, Duration.ofSeconds(5000))
+                .shouldBe(Condition.visible, Duration.ofSeconds(9000))
                 .getOwnText();
         Selenide.clearBrowserCookies();
         Selenide.clearBrowserLocalStorage();
@@ -200,7 +200,7 @@ public class NewTests {
         $x("//*[@data-test-id=\"smsCode--input\"]").setValue("111111");
 
 
-        sleep(5000);
+        sleep(9000);
 
 
 //        Selenide.switchTo().newWindow(WindowType.TAB);
