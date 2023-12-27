@@ -12,13 +12,14 @@ import ui.pages.SberCRM;
 
 import java.time.Duration;
 
-import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
 public class NewTests {
 
     private String url = "https://app-ift.sbercrm.com/#/login";
     String newUrl;
+    private String testUserInnLogin = "test_user_inn3277300909_06";
+    private String testUserInnPassword = "123456";
     LoginPageSberCRM loginPage = new LoginPageSberCRM();
     LoginPageSBBOL loginPageSBBOL = new LoginPageSBBOL();
     SberCRM sberCRM = new SberCRM();
@@ -61,8 +62,8 @@ public class NewTests {
         // маин юзер для подключения Кредита в корзине
         Selenide.open(url);
         loginPage.buttonLogInBySBBOL.click();
-        loginPageSBBOL.textFieldLogin.setValue("test_user_inn3277300909_06");
-        loginPageSBBOL.textFieldPassword.setValue("123456");
+        loginPageSBBOL.textFieldLogin.setValue(testUserInnLogin);
+        loginPageSBBOL.textFieldPassword.setValue(testUserInnPassword);
         loginPageSBBOL.buttonNext.click();
         sleep(5000);
         sberCRM.navBarFormMarketPlace.click();
@@ -87,8 +88,8 @@ public class NewTests {
         // маин юзер для подключения Моментальных платежей
         Selenide.open(url);
         loginPage.buttonLogInBySBBOL.click();
-        loginPageSBBOL.textFieldLogin.setValue("test_user_inn3277300909_06");
-        loginPageSBBOL.textFieldPassword.setValue("123456");
+        loginPageSBBOL.textFieldLogin.setValue(testUserInnLogin);
+        loginPageSBBOL.textFieldPassword.setValue(testUserInnPassword);
         loginPageSBBOL.buttonNext.click();
         sleep(4000);
         sberCRM.navBarFormMarketPlace.click();
@@ -115,8 +116,8 @@ public class NewTests {
         Selenide.open(url);
         $x("//*[contains(text(),'ОК')]").click();
         loginPage.buttonLogInBySBBOL.click();
-        loginPageSBBOL.textFieldLogin.setValue("test_user_inn3277300909_06");
-        loginPageSBBOL.textFieldPassword.setValue("123456");
+        loginPageSBBOL.textFieldLogin.setValue(testUserInnLogin);
+        loginPageSBBOL.textFieldPassword.setValue(testUserInnPassword);
         loginPageSBBOL.buttonNext.click();
 //        loginPageSBBOL.buttonAccept.click();
 //        loginPageSBBOL.TextFieldSmsCode.setValue("111111");
@@ -184,8 +185,8 @@ public class NewTests {
         // маин юзер для отключения Моментальных платежей
         Selenide.open(url);
         loginPage.buttonLogInBySBBOL.click();
-        loginPageSBBOL.textFieldLogin.setValue("test_user_inn3277300909_06");
-        loginPageSBBOL.textFieldPassword.setValue("123456");
+        loginPageSBBOL.textFieldLogin.setValue(testUserInnLogin);
+        loginPageSBBOL.textFieldPassword.setValue(testUserInnPassword);
         loginPageSBBOL.buttonNext.click();
         sleep(5000);
         sberCRM.navBarFormMarketPlace.click();
