@@ -33,25 +33,6 @@ public class NewTests {
 
     @Test
     @Disabled
-    public void firstTest() {
-        Selenide.open(url);
-        sleep(2000);
-        $("input[name=\"username\"]").setValue("aedivanov@sberbank.ru");
-        $("input[name=\"password\"]").setValue("Lelikus1981asd");
-        $("button[type=\"submit\"]").click();
-        sleep(9000);
-        $("button.MuiButtonBase-root:nth-child(6) > span:nth-child(1)").click();
-//        $(byText("Collapse")).shouldBe(Condition.visible);
-        $(".MuiCollapse-wrapperInner > li:nth-child(3) > div:nth-child(1) " +
-                "> div:nth-child(2) > p:nth-child(1)").click();
-        sleep(2000);
-        $("div.MuiGrid-root:nth-child(7) > div:nth-child(1)").click();
-        sleep(2000);
-        $(byText("Installed")).shouldBe(Condition.visible);
-    }
-
-    @Test
-    @Disabled
     void checkAddMP() {
         // НЕ маин юзер для подключения Моментальных платежей
         Selenide.open(url);
@@ -74,31 +55,7 @@ public class NewTests {
     }
 
     @Test
-    @DisplayName("Connect and disconnect B2B with mainUser")
-    void registerBySbbolForMp() {
-        // маин юзер для подключения Моментальных платежей
-        Selenide.open(url);
-        loginPage.buttonLogInBySBBOL.click();
-        loginPageSBBOL.textFieldLogin.setValue("test_user_inn3277300909_06");
-        loginPageSBBOL.textFieldPassword.setValue("123456");
-        loginPageSBBOL.buttonNext.click();
-        sleep(5000);
-        sberCRM.navBarFormMarketPlace.click();
-        $("li:nth-child(7) div:nth-child(1) div:nth-child(2) p:nth-child(1)").click();
-
-        $(By.xpath("//p[contains(text(),'Моментальные платежи B2B')]")).click();
-
-        $(By.xpath("//span[contains(text(),'Установить')]")).click();
-        sleep(1000);
-        refresh();
-        sleep(5000);
-        $(By.xpath("//span[contains(text(),'Отключить')]")).click();
-        refresh();
-        sleep(5000);
-        Selenide.closeWebDriver();
-    }
-
-    @Test
+    @Disabled
     @DisplayName("Connect and disconnect KVK with mainUser")
     void registerBySbbolForKvk() {
         // маин юзер для подключения Кредита в корзине
@@ -125,6 +82,30 @@ public class NewTests {
     }
 
     @Test
+    @DisplayName("Connect B2B with mainUser")
+    void registerBySbbolForMp() {
+        // маин юзер для подключения Моментальных платежей
+        Selenide.open(url);
+        loginPage.buttonLogInBySBBOL.click();
+        loginPageSBBOL.textFieldLogin.setValue("test_user_inn3277300909_06");
+        loginPageSBBOL.textFieldPassword.setValue("123456");
+        loginPageSBBOL.buttonNext.click();
+        sleep(5000);
+        sberCRM.navBarFormMarketPlace.click();
+        $("li:nth-child(7) div:nth-child(1) div:nth-child(2) p:nth-child(1)").click();
+        $(By.xpath("//p[contains(text(),'Моментальные платежи B2B')]")).click();
+        $(By.xpath("//span[contains(text(),'Установить')]")).click();
+        sleep(5000);
+        refresh();
+        sleep(5000);
+        $(By.xpath("//span[contains(text(),'Отключить')]")).shouldBe(Condition.visible);
+
+        Selenide.clearBrowserCookies();
+        Selenide.clearBrowserLocalStorage();
+        Selenide.closeWebDriver();
+    }
+
+    @Test
     @DisplayName("Verification of link creation and account creation for Instant Payments service")
     void checkMpLink() {
 
@@ -137,16 +118,6 @@ public class NewTests {
         loginPageSBBOL.buttonNext.click();
 //        loginPageSBBOL.buttonAccept.click();
 //        loginPageSBBOL.TextFieldSmsCode.setValue("111111");
-
-        // Подключение сервиса Моментальные платежи
-        sberCRM.navBarFormMarketPlace.click();
-        $("li:nth-child(7) div:nth-child(1) div:nth-child(2) p:nth-child(1)").click();
-        $(By.xpath("//p[contains(text(),'Моментальные платежи B2B')]")).click();
-        $(By.xpath("//span[contains(text(),'Установить')]")).click();
-        refresh();
-        $x("//*[@id=\"scrollContainer\"]/main/div/div/button/span")
-                .shouldBe(Condition.visible, Duration.ofSeconds(9000))
-                .click();
 
         // открыть счет
         $(By.xpath("//span[contains(text(),'Управление предприятием')]"))
@@ -197,22 +168,40 @@ public class NewTests {
         loginPageSBBOL.textFieldLogin.setValue("bus-anar");
         loginPageSBBOL.textFieldPassword.setValue("123456");
         loginPageSBBOL.buttonNext.click();
-        $x("//*[@data-test-id=\"smsCode--input\"]").setValue("111111");
-
+        $x("//*[@data-test-id='smsCode--input']").setValue("111111");
 
         sleep(9000);
-
-
 //        Selenide.switchTo().newWindow(WindowType.TAB);
 //        Selenide.open(newUrl);
-
-
         sleep(6000);
 //        System.out.println(newUrl);
-
-
         sleep(2000);
+        Selenide.clearBrowserCookies();
+        Selenide.clearBrowserLocalStorage();
+        Selenide.closeWebDriver();
+    }
 
+    @Test
+    @DisplayName("Disconnect B2B with mainUser")
+    void turnOffBySbbolForMp() {
+        // маин юзер для отключения Моментальных платежей
+        Selenide.open(url);
+        loginPage.buttonLogInBySBBOL.click();
+        loginPageSBBOL.textFieldLogin.setValue("test_user_inn3277300909_06");
+        loginPageSBBOL.textFieldPassword.setValue("123456");
+        loginPageSBBOL.buttonNext.click();
+        sleep(5000);
+        sberCRM.navBarFormMarketPlace.click();
+        $("li:nth-child(7) div:nth-child(1) div:nth-child(2) p:nth-child(1)").click();
+        $(By.xpath("//p[contains(text(),'Моментальные платежи B2B')]")).click();
+        $(By.xpath("//span[contains(text(),'Отключить')]")).click();
+        sleep(5000);
+        refresh();
+        sleep(5000);
+        $(By.xpath("//span[contains(text(),'Установить')]")).shouldBe(Condition.visible);
 
+        Selenide.clearBrowserCookies();
+        Selenide.clearBrowserLocalStorage();
+        Selenide.closeWebDriver();
     }
 }

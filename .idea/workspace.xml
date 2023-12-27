@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7c3cf8f5-5030-4ad0-9c9b-480bb07277d9" name="Changes" comment="Добавлен тест для проверки создания ссылки на оплату и создание Платежного поручения при включеном сервисе Моментальные платежи" />
+    <list default="true" id="7c3cf8f5-5030-4ad0-9c9b-480bb07277d9" name="Changes" comment="Добавлен тест для проверки создания ссылки на оплату и создание Платежного поручения при включеном сервисе Моментальные платежи">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/ui/NewTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ui/NewTests.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -71,7 +74,7 @@
     &quot;settings.editor.selected.configurable&quot;: &quot;File.Encoding&quot;
   }
 }</component>
-  <component name="RunManager" selected="Gradle.NewTests.checkMpLink">
+  <component name="RunManager" selected="Gradle.NewTests">
     <configuration name="NewTests" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -141,29 +144,6 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="NewTests.registerBySbbolForKvk" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-            <option value="--tests" />
-            <option value="&quot;ui.NewTests.registerBySbbolForKvk&quot;" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
     <configuration name="NewTests.registerBySbbolForMp" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -187,13 +167,36 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
+    <configuration name="NewTests.turnOffBySbbolForMp" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;ui.NewTests.turnOffBySbbolForMp&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.NewTests.checkMpLink" />
-        <item itemvalue="Gradle.NewTests.registerBySbbolForMp" />
-        <item itemvalue="Gradle.NewTests.addMpLink" />
         <item itemvalue="Gradle.NewTests" />
-        <item itemvalue="Gradle.NewTests.registerBySbbolForKvk" />
+        <item itemvalue="Gradle.NewTests.turnOffBySbbolForMp" />
+        <item itemvalue="Gradle.NewTests.registerBySbbolForMp" />
+        <item itemvalue="Gradle.NewTests.checkMpLink" />
+        <item itemvalue="Gradle.NewTests.addMpLink" />
       </list>
     </recent_temporary>
   </component>
@@ -220,7 +223,14 @@
       <option name="project" value="LOCAL" />
       <updated>1703657697179</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Добавлен тест для проверки создания ссылки на оплату и создание Платежного поручения при включеном сервисе Моментальные платежи">
+      <created>1703658136452</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1703658136452</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
