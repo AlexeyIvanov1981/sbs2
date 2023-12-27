@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7c3cf8f5-5030-4ad0-9c9b-480bb07277d9" name="Changes" comment="Добавлен тест для проверки создания ссылки на оплату и создание Платежного поручения при включеном сервисе Моментальные платежи">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ui/NewTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ui/NewTests.java" afterDir="false" />
-    </list>
+    <list default="true" id="7c3cf8f5-5030-4ad0-9c9b-480bb07277d9" name="Changes" comment="изменение в тесте registerBySbbolForMp" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -237,7 +234,14 @@
       <option name="project" value="LOCAL" />
       <updated>1703660267791</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="изменение в тесте registerBySbbolForMp">
+      <created>1703661936123</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1703661936123</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -254,7 +258,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="1" />
     <MESSAGE value="Добавлен тест для проверки создания ссылки на оплату и создание Платежного поручения при включеном сервисе Моментальные платежи" />
-    <option name="LAST_COMMIT_MESSAGE" value="Добавлен тест для проверки создания ссылки на оплату и создание Платежного поручения при включеном сервисе Моментальные платежи" />
+    <MESSAGE value="изменение в тесте registerBySbbolForMp" />
+    <option name="LAST_COMMIT_MESSAGE" value="изменение в тесте registerBySbbolForMp" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

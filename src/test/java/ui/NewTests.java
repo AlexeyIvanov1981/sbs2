@@ -172,12 +172,7 @@ public class NewTests {
         loginPageSBBOL.buttonNext.click();
         $x("//*[@data-test-id='smsCode--input']").setValue("111111");
 
-        sleep(9000);
-//        Selenide.switchTo().newWindow(WindowType.TAB);
-//        Selenide.open(newUrl);
-        sleep(6000);
-//        System.out.println(newUrl);
-        sleep(2000);
+        sleep(10000);
         Selenide.clearBrowserCookies();
         Selenide.clearBrowserLocalStorage();
         Selenide.closeWebDriver();
