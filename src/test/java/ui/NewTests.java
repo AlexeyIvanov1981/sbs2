@@ -30,6 +30,7 @@ public class NewTests {
     @BeforeAll
     static void browserSettings() {
         Configuration.browser = "FIREFOX";
+//        Configuration.browserVersion = "114";
         Configuration.browserSize = "1900x1070";
     }
 
@@ -70,6 +71,10 @@ public class NewTests {
         sberCRM.navBarFormMarketPlace.click();
         // нажатие на кнопку "Способы оплаты"
         $("//div[@class='MuiCollapse-wrapperInner']//li[7]").click();
+        /*
+        или такой локатор (необходимо проверить)
+        $x("//*[contains(text(),'Способы оплаты')]").click();
+        */
         // выбор тикета "Рассрочка для бизнеса"
         $(By.xpath("//p[contains(text(),'Рассрочка для бизнеса')]")).click();
         $(By.xpath("//span[contains(text(),'Установить')]")).click();
@@ -102,7 +107,6 @@ public class NewTests {
         sleep(3000);
         $(By.xpath("//*[contains(text(),'Подключен')]"))
                 .shouldBe(Condition.visible);
-//        $(By.xpath("//span[contains(text(),'Отключить')]")).shouldBe(Condition.visible);
 
         Selenide.clearBrowserCookies();
         Selenide.clearBrowserLocalStorage();
@@ -173,8 +177,20 @@ public class NewTests {
         loginPageSBBOL.textFieldPassword.setValue("123456");
         loginPageSBBOL.buttonNext.click();
         $x("//*[@data-test-id='smsCode--input']").setValue("111111");
-
         sleep(10000);
+
+        // создание платежного поручения
+        $x("//*[contains(text(), 'Показать детали платежа')]").click();
+        $x("//*[@data-test-id='paymentAmount__purpose--label']").shouldBe(Condition.visible);
+        $x("//*[@data-test-id='__requestOTP--button']").click();
+        $x("//*[@data-test-id='__requestOTP--button']").setValue("11111");
+        $x("//*[@data-test-id='PaymentCreatorDetails__title']").shouldBe(Condition.visible);
+        $x("//*[contains(text(),'После положительного ответа банка документ будет переведён в статус \"Исполнен\"')]")
+                .shouldBe(Condition.visible);
+        /*
+        или для проверки можно заменить предыдущую строку
+        $x("//*[@data-test-id='PaymentCreatorDetails__text']").shouldBe(Condition.visible);
+        */
         Selenide.clearBrowserCookies();
         Selenide.clearBrowserLocalStorage();
         Selenide.closeWebDriver();
@@ -191,13 +207,13 @@ public class NewTests {
         loginPageSBBOL.buttonNext.click();
         sleep(5000);
         sberCRM.navBarFormMarketPlace.click();
-        $("li:nth-child(7) div:nth-child(1) div:nth-child(2) p:nth-child(1)").click();
-        $(By.xpath("//p[contains(text(),'Моментальные платежи B2B')]")).click();
-        $(By.xpath("//span[contains(text(),'Отключить')]")).click();
-        sleep(5000);
+        $x("//*[contains(text(),'Способы оплаты')]").click();
+        $(By.xpath("//*[contains(text(),'Моментальные платежи B2B')]")).click();
+        $(By.xpath("//*[contains(text(),'Отключить')]")).click();
+        sleep(2000);
         refresh();
         sleep(5000);
-        $(By.xpath("//span[contains(text(),'Установить')]")).shouldBe(Condition.visible);
+        $(By.xpath("//*[contains(text(),'Установить')]")).shouldBe(Condition.visible);
 
         Selenide.clearBrowserCookies();
         Selenide.clearBrowserLocalStorage();
