@@ -70,7 +70,7 @@ public class NewTests {
         sleep(5000);
         sberCRM.navBarFormMarketPlace.click();
         // нажатие на кнопку "Способы оплаты"
-        $("//div[@class='MuiCollapse-wrapperInner']//li[7]").click();
+        sberCRM.buttonPaymentMethods.click();
         /*
         или такой локатор (необходимо проверить)
         $x("//*[contains(text(),'Способы оплаты')]").click();
@@ -99,8 +99,8 @@ public class NewTests {
         loginPageSBBOL.buttonNext.click();
         sleep(4000);
         sberCRM.navBarFormMarketPlace.click();
-        $("li:nth-child(7) div:nth-child(1) div:nth-child(2) p:nth-child(1)").click();
-        $(By.xpath("//p[contains(text(),'Моментальные платежи B2B')]")).click();
+        sberCRM.buttonPaymentMethods.click();
+        sberCRM.buttonB2B.click();
         $(By.xpath("//*[contains(text(),'Установить')]")).click();
         sleep(3000);
         refresh();
@@ -158,11 +158,10 @@ public class NewTests {
         $x("//span[contains(text(),'ОК')]").click();
         $x("//*[@name='total_with_vat$erp']").setValue("1.25");
         $x("//span[contains(text(),'Сохранить и перейти')]").click();
+        sleep(6000);
 
         // Создание ссылки на оплату
-        $x("//span[contains(text(),'Ссылка на оплату')]")
-                .shouldBe(Condition.visible, Duration.ofSeconds(9000))
-                .click();
+        $x("//span[contains(text(),'Ссылка на оплату')]").click();
         newUrl = $x("/html/body/div[3]/div[3]/div/form/div[1]/div/div/div[2]/a")
                 .shouldBe(Condition.visible, Duration.ofSeconds(9000))
                 .getOwnText();
@@ -183,7 +182,9 @@ public class NewTests {
         $x("//*[contains(text(), 'Показать детали платежа')]").click();
         $x("//*[@data-test-id='paymentAmount__purpose--label']").shouldBe(Condition.visible);
         $x("//*[@data-test-id='__requestOTP--button']").click();
-        $x("//*[@data-test-id='__requestOTP--button']").setValue("11111");
+        sleep(2000);
+        $x("//*[@data-test-id='__otp--input']").setValue("11111").pressEnter();
+        sleep(2000);
         $x("//*[@data-test-id='PaymentCreatorDetails__title']").shouldBe(Condition.visible);
         $x("//*[contains(text(),'После положительного ответа банка документ будет переведён в статус \"Исполнен\"')]")
                 .shouldBe(Condition.visible);
@@ -207,8 +208,8 @@ public class NewTests {
         loginPageSBBOL.buttonNext.click();
         sleep(5000);
         sberCRM.navBarFormMarketPlace.click();
-        $x("//*[contains(text(),'Способы оплаты')]").click();
-        $(By.xpath("//*[contains(text(),'Моментальные платежи B2B')]")).click();
+        sberCRM.buttonPaymentMethods.click();
+        sberCRM.buttonB2B.click();
         $(By.xpath("//*[contains(text(),'Отключить')]")).click();
         sleep(2000);
         refresh();

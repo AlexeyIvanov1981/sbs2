@@ -4,11 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7c3cf8f5-5030-4ad0-9c9b-480bb07277d9" name="Changes" comment="вынес данные тестового пользователя в переменные">
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+    <list default="true" id="7c3cf8f5-5030-4ad0-9c9b-480bb07277d9" name="Changes" comment="переработка тестов">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/ui/NewTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ui/NewTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/ui/pages/SberCRM.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ui/pages/SberCRM.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,7 +75,7 @@
     &quot;settings.editor.selected.configurable&quot;: &quot;configurable.group.build&quot;
   }
 }</component>
-  <component name="RunManager" selected="Gradle.NewTests.turnOffBySbbolForMp">
+  <component name="RunManager" selected="Gradle.NewTests">
     <configuration name="NewTests" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -194,10 +193,10 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.NewTests.turnOffBySbbolForMp" />
         <item itemvalue="Gradle.NewTests" />
-        <item itemvalue="Gradle.NewTests.registerBySbbolForMp" />
+        <item itemvalue="Gradle.NewTests.turnOffBySbbolForMp" />
         <item itemvalue="Gradle.NewTests.checkMpLink" />
+        <item itemvalue="Gradle.NewTests.registerBySbbolForMp" />
         <item itemvalue="Gradle.NewTests.addMpLink" />
       </list>
     </recent_temporary>
@@ -267,7 +266,14 @@
       <option name="project" value="LOCAL" />
       <updated>1703662966994</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="переработка тестов">
+      <created>1703669586055</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1703669586055</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -287,7 +293,8 @@
     <MESSAGE value="изменение в тесте registerBySbbolForMp" />
     <MESSAGE value="изменение в тестах" />
     <MESSAGE value="вынес данные тестового пользователя в переменные" />
-    <option name="LAST_COMMIT_MESSAGE" value="вынес данные тестового пользователя в переменные" />
+    <MESSAGE value="переработка тестов" />
+    <option name="LAST_COMMIT_MESSAGE" value="переработка тестов" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
