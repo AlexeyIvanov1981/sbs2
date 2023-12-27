@@ -90,15 +90,17 @@ public class NewTests {
         loginPageSBBOL.textFieldLogin.setValue("test_user_inn3277300909_06");
         loginPageSBBOL.textFieldPassword.setValue("123456");
         loginPageSBBOL.buttonNext.click();
-        sleep(5000);
+        sleep(4000);
         sberCRM.navBarFormMarketPlace.click();
         $("li:nth-child(7) div:nth-child(1) div:nth-child(2) p:nth-child(1)").click();
         $(By.xpath("//p[contains(text(),'Моментальные платежи B2B')]")).click();
-        $(By.xpath("//span[contains(text(),'Установить')]")).click();
-        sleep(5000);
+        $(By.xpath("//*[contains(text(),'Установить')]")).click();
+        sleep(3000);
         refresh();
-        sleep(5000);
-        $(By.xpath("//span[contains(text(),'Отключить')]")).shouldBe(Condition.visible);
+        sleep(3000);
+        $(By.xpath("//*[contains(text(),'Подключен')]"))
+                .shouldBe(Condition.visible);
+//        $(By.xpath("//span[contains(text(),'Отключить')]")).shouldBe(Condition.visible);
 
         Selenide.clearBrowserCookies();
         Selenide.clearBrowserLocalStorage();
