@@ -16,10 +16,11 @@ import static com.codeborne.selenide.Selenide.*;
 
 public class NewTests {
 
-    private String url = "https://app-ift.sbercrm.com/#/login";
+    private final String urlIFT = "https://app-ift.sbercrm.com/#/login";
     String newUrl;
-    private String testUserInnLogin = "test_user_inn3277300909_06";
-    private String testUserInnPassword = "123456";
+
+    private final String testUserInnLogin = "test_user_inn3277300909_06";
+    private final String testUserInnPassword = "123456";
     LoginPageSberCRM loginPage = new LoginPageSberCRM();
     LoginPageSBBOL loginPageSBBOL = new LoginPageSBBOL();
     SberCRM sberCRM = new SberCRM();
@@ -36,7 +37,7 @@ public class NewTests {
     @Disabled
     void checkAddMP() {
         // НЕ маин юзер для подключения Моментальных платежей
-        Selenide.open(url);
+        Selenide.open(urlIFT);
         sleep(2000);
         loginPage.textFieldUserName.setValue("aedivanov@sberbank.ru");
         loginPage.textFieldPassword.setValue("Lelikus1981asd");
@@ -60,7 +61,7 @@ public class NewTests {
     @DisplayName("Connect and disconnect KVK with mainUser")
     void registerBySbbolForKvk() {
         // маин юзер для подключения Кредита в корзине
-        Selenide.open(url);
+        Selenide.open(urlIFT);
         loginPage.buttonLogInBySBBOL.click();
         loginPageSBBOL.textFieldLogin.setValue(testUserInnLogin);
         loginPageSBBOL.textFieldPassword.setValue(testUserInnPassword);
@@ -86,7 +87,7 @@ public class NewTests {
     @DisplayName("Connect B2B with mainUser")
     void registerBySbbolForMp() {
         // маин юзер для подключения Моментальных платежей
-        Selenide.open(url);
+        Selenide.open(urlIFT);
         loginPage.buttonLogInBySBBOL.click();
         loginPageSBBOL.textFieldLogin.setValue(testUserInnLogin);
         loginPageSBBOL.textFieldPassword.setValue(testUserInnPassword);
@@ -113,7 +114,7 @@ public class NewTests {
     void checkMpLink() {
 
         // Авторизация через СББОЛ
-        Selenide.open(url);
+        Selenide.open(urlIFT);
         $x("//*[contains(text(),'ОК')]").click();
         loginPage.buttonLogInBySBBOL.click();
         loginPageSBBOL.textFieldLogin.setValue(testUserInnLogin);
@@ -183,7 +184,7 @@ public class NewTests {
     @DisplayName("Disconnect B2B with mainUser")
     void turnOffBySbbolForMp() {
         // маин юзер для отключения Моментальных платежей
-        Selenide.open(url);
+        Selenide.open(urlIFT);
         loginPage.buttonLogInBySBBOL.click();
         loginPageSBBOL.textFieldLogin.setValue(testUserInnLogin);
         loginPageSBBOL.textFieldPassword.setValue(testUserInnPassword);
