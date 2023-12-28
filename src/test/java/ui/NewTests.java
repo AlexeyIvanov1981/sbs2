@@ -15,7 +15,6 @@ import static com.codeborne.selenide.Selenide.*;
 
 public class NewTests {
 
-
     String newUrl;
 
     private final String testUserInnLogin = "test_user_inn3277300909_06";
@@ -23,7 +22,6 @@ public class NewTests {
     SBBOL sbbol = new SBBOL();
     SberCRM sberCRM = new SberCRM();
 
-    // executeJavaScript("window.open(\"http://www.google.com\");"); новая вкладка
 
     @BeforeAll
     static void browserSettings() {
@@ -32,7 +30,7 @@ public class NewTests {
     }
 
     @Test
-//    @Disabled
+    @Disabled
     void checkAddMP() {
         // НЕ маин юзер для подключения Моментальных платежей
         sberCRM.openSberCrmLoginPage();
@@ -85,9 +83,7 @@ public class NewTests {
         // маин юзер для подключения Моментальных платежей
         sberCRM.openSberCrmLoginPage();
         sberCRM.buttonLogInSberBusinessId.click();
-        sbbol.textFieldLogin.setValue(testUserInnLogin);
-        sbbol.textFieldPassword.setValue(testUserInnPassword);
-        sbbol.buttonNext.click();
+        sbbol.loginSbbol(testUserInnLogin, testUserInnPassword);
         sleep(4000);
         sberCRM.openMarketPlace();
         sberCRM.openPaymentMethods();
@@ -164,17 +160,15 @@ public class NewTests {
         // маин юзер для отключения Моментальных платежей
         sberCRM.openSberCrmLoginPage();
         sberCRM.buttonLogInSberBusinessId.click();
-        sbbol.textFieldLogin.setValue(testUserInnLogin);
-        sbbol.textFieldPassword.setValue(testUserInnPassword);
-        sbbol.buttonNext.click();
-        sleep(5000);
+        sbbol.loginSbbol(testUserInnLogin, testUserInnPassword);
+        sleep(9000);
         sberCRM.navBarFormMarketPlace.click();
         sberCRM.buttonPaymentMethods.click();
         sberCRM.buttonTicketB2B.click();
         $(By.xpath("//*[contains(text(),'Отключить')]")).click();
         sleep(2000);
         refresh();
-        sleep(5000);
+        sleep(6000);
         $(By.xpath("//*[contains(text(),'Установить')]")).shouldBe(Condition.visible);
 
         Selenide.clearBrowserCookies();
