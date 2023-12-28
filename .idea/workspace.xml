@@ -4,8 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7c3cf8f5-5030-4ad0-9c9b-480bb07277d9" name="Changes" comment="переработка тестов и добавление методов для каждого теста">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="7c3cf8f5-5030-4ad0-9c9b-480bb07277d9" name="Changes" comment="добавлено два теста в цепочку">
       <change beforePath="$PROJECT_DIR$/src/test/java/ui/NewTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ui/NewTests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -74,7 +73,7 @@
     &quot;settings.editor.selected.configurable&quot;: &quot;configurable.group.build&quot;
   }
 }</component>
-  <component name="RunManager" selected="Gradle.NewTests">
+  <component name="RunManager" selected="Gradle.NewTests.turnOffBySbbolForMp">
     <configuration name="NewTests" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -192,11 +191,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.NewTests.turnOffBySbbolForMp" />
+        <item itemvalue="Gradle.NewTests.registerBySbbolForMp" />
         <item itemvalue="Gradle.NewTests" />
         <item itemvalue="Gradle.NewTests.checkAddMP" />
         <item itemvalue="Gradle.NewTests.checkMpLink" />
-        <item itemvalue="Gradle.NewTests.registerBySbbolForMp" />
-        <item itemvalue="Gradle.NewTests.turnOffBySbbolForMp" />
       </list>
     </recent_temporary>
   </component>
@@ -286,7 +285,14 @@
       <option name="project" value="LOCAL" />
       <updated>1703759216955</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="добавлено два теста в цепочку">
+      <created>1703760320112</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1703760320112</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -308,7 +314,8 @@
     <MESSAGE value="вынес данные тестового пользователя в переменные" />
     <MESSAGE value="переработка тестов" />
     <MESSAGE value="переработка тестов и добавление методов для каждого теста" />
-    <option name="LAST_COMMIT_MESSAGE" value="переработка тестов и добавление методов для каждого теста" />
+    <MESSAGE value="добавлено два теста в цепочку" />
+    <option name="LAST_COMMIT_MESSAGE" value="добавлено два теста в цепочку" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

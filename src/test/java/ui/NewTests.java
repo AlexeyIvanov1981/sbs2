@@ -93,7 +93,8 @@ public class NewTests {
         refresh();
         sleep(3000);
         $(By.xpath("//*[contains(text(),'Подключен')]"))
-                .shouldBe(Condition.visible);
+                .shouldBe(Condition.visible)
+                .shouldHave(Condition.text("Подключен"));;
 
         Selenide.clearBrowserCookies();
         Selenide.clearBrowserLocalStorage();
@@ -166,10 +167,12 @@ public class NewTests {
         sberCRM.buttonPaymentMethods.click();
         sberCRM.buttonTicketB2B.click();
         $(By.xpath("//*[contains(text(),'Отключить')]")).click();
-        sleep(2000);
+        sleep(4000);
         refresh();
         sleep(6000);
-        $(By.xpath("//*[contains(text(),'Установить')]")).shouldBe(Condition.visible);
+        $x("//*[contains(text(),'Установить')]")
+                .shouldBe(Condition.visible)
+                .shouldHave(Condition.text("Установить"));
 
         Selenide.clearBrowserCookies();
         Selenide.clearBrowserLocalStorage();
