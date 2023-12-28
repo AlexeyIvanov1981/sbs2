@@ -30,6 +30,17 @@ public class NewTests {
     }
 
     @Test
+    @DisplayName("remove the authorization agreement")
+    void removeTheAuthorizationAgreement() {
+        // удаления соглашения для правильной работы остальных тестов БУДЕТ ЧАСТО ПАДАТЬ!!!!
+        sberCRM.openSberCrmLoginPage();
+        sberCRM.buttonLogInSberBusinessId.click();
+        sbbol.loginSbbol(testUserInnLogin, testUserInnPassword);
+        sbbol.buttonAccept.click();
+        sbbol.textFieldSmsCode.setValue("111111");
+    }
+
+    @Test
     @Disabled
     void checkAddMP() {
         // НЕ маин юзер для подключения Моментальных платежей
