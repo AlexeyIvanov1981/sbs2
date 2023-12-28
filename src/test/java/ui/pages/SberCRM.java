@@ -57,12 +57,14 @@ public class SberCRM {
 
         Selenide.$x("//textarea[@placeholder='...']")
                 .shouldBe(Condition.visible, Duration.ofSeconds(9000))
-                .setValue("TestTest122");
+                .setValue("Demo test for IFT&HF");
         Selenide.$x("//*[@name='invoice_type$erp']").hover().setValue("Исходящий");
         Selenide.$x("//*[@class='MuiAutocomplete-listbox']//*[.='Исходящий']").click();
         Selenide.$x("//*[@name='bank_details$erp']").click();
+        // выбор реквизитов моей компании
         Selenide.$x("//*[@id='autocomplete-bank_details$erp-option-1']").click();
         Selenide.$x("//*[@name='organization$erp']").click();
+        // выбор реквизитов плательщика
         Selenide.$x("//*[@id='autocomplete-organization$erp-option-3']/div").click();
         Selenide.$x("//*[@name='total_sum$erp']").hover();
         Selenide.$x("//*[@name='total_sum$erp']/following-sibling::*//*[@title='Отключить расчет по формуле']")
