@@ -145,7 +145,8 @@ public class NewTests {
         $x("//*[@data-test-id='PaymentCreatorDetails__title']").shouldBe(Condition.visible);
         $x("//*[contains(text(),'После положительного ответа банка документ будет " +
                 "переведён в статус \"Исполнен\"')]")
-                .shouldBe(Condition.visible);
+                .shouldBe(Condition.visible)
+                .shouldHave(Condition.text("После положительного ответа банка документ будет переведён в статус \"Исполнен\""));
         /*
         или для проверки можно заменить предыдущую строку
         $x("//*[@data-test-id='PaymentCreatorDetails__text']").shouldBe(Condition.visible);
