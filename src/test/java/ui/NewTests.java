@@ -94,7 +94,7 @@ public class NewTests {
         sleep(3000);
         $(By.xpath("//*[contains(text(),'Подключен')]"))
                 .shouldBe(Condition.visible)
-                .shouldHave(Condition.text("Подключен"));;
+                .shouldHave(Condition.text("Подключен"));
 
         Selenide.clearBrowserCookies();
         Selenide.clearBrowserLocalStorage();
