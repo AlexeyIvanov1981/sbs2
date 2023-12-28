@@ -90,7 +90,7 @@ public class NewTests {
 
     @Test
     @DisplayName("Connect B2B with mainUser")
-    void registerBySbbolForMp() {
+    void connectMp() {
         // маин юзер для подключения Моментальных платежей
         sberCRM.openSberCrmLoginPage();
         sberCRM.buttonLogInSberBusinessId.click();
@@ -169,7 +169,7 @@ public class NewTests {
 
     @Test
     @DisplayName("Disconnect B2B with mainUser")
-    void turnOffBySbbolForMp() {
+    void disconnectMp() {
         // маин юзер для отключения Моментальных платежей
         sberCRM.openSberCrmLoginPage();
         sberCRM.buttonLogInSberBusinessId.click();
