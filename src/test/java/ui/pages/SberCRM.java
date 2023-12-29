@@ -24,8 +24,10 @@ public class SberCRM {
             navBarFormMarketPlace = $x("//*[@title='Маркетплейс']"),
             buttonPaymentMethods = $x("//*[contains(text(),'Способы оплаты')]"),
             buttonTicketB2B = $x("//p[contains(text(),'Моментальные платежи B2B')]"),
-            buttonConnectB2B = $x("//span[contains(text(),'Установить')]"),
-            buttonOkForCookies = $x("//*[@class='jss93']");
+            buttonConnect = $x("//span[contains(text(),'Установить')]"),
+            buttonDisconnect = $(By.xpath("//*[contains(text(),'Отключить')]")),
+            buttonOkForCookies = $x("//*[@class='jss93']"),
+            buttonTicketKVK = $(By.xpath("//p[contains(text(),'Рассрочка для бизнеса')]"));
 
     public void openMarketPlace() {
         navBarFormMarketPlace.click();
@@ -66,6 +68,37 @@ public class SberCRM {
         Selenide.$x("//*[@name='organization$erp']").click();
         // выбор реквизитов плательщика
         Selenide.$x("//*[@id='autocomplete-organization$erp-option-3']/div").click();
+        Selenide.$x("//*[@name='total_sum$erp']").hover();
+        Selenide.$x("//*[@name='total_sum$erp']/following-sibling::*//*[@title='Отключить расчет по формуле']")
+                .click();
+        Selenide.$x("//span[contains(text(),'ОК')]").click();
+        Selenide.$x("//*[@name='total_sum$erp']").setValue(sum);
+        Selenide.$x("//*[@class='MuiCollapse-container MuiCollapse-entered']")
+                .scrollIntoView("true");
+        Selenide.$x("//*[@name='vat_rate$erp']").hover().click();
+        Selenide.$x("//*[@class='MuiAutocomplete-listbox']//*[.='0%']").click();
+        Selenide.$x("//*[@name='total_with_vat$erp']").hover();
+        Selenide.$x("//*[@name='total_with_vat$erp']/following-sibling::*//*[@title='Отключить расчет по формуле']")
+                .click();
+        Selenide.$x("//span[contains(text(),'ОК')]").click();
+        Selenide.$x("//*[@name='total_with_vat$erp']").setValue(sum);
+        Selenide.$x("//span[contains(text(),'Сохранить и перейти')]").click();
+    }
+
+
+    public void creatingAnInvoiceForTestUserInn_44(String sum) {
+
+        Selenide.$x("//textarea[@placeholder='...']")
+                .shouldBe(Condition.visible, Duration.ofSeconds(9000))
+                .setValue("Demo test for IFT&HF");
+        Selenide.$x("//*[@name='invoice_type$erp']").hover().setValue("Исходящий");
+        Selenide.$x("//*[@class='MuiAutocomplete-listbox']//*[.='Исходящий']").click();
+        Selenide.$x("//*[@name='bank_details$erp']").click();
+        // выбор реквизитов моей компании
+        Selenide.$x("//*[@id='autocomplete-bank_details$erp-option-1']").click();
+        Selenide.$x("//*[@name='organization$erp']").click();
+        // выбор реквизитов плательщика
+        Selenide.$x("//*[@id='autocomplete-organization$erp-option-2']/div").click();
         Selenide.$x("//*[@name='total_sum$erp']").hover();
         Selenide.$x("//*[@name='total_sum$erp']/following-sibling::*//*[@title='Отключить расчет по формуле']")
                 .click();
