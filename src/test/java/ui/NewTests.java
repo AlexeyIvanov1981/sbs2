@@ -64,31 +64,6 @@ public class NewTests {
     }
 
     @Test
-    @Disabled
-    @DisplayName("Connect and disconnect KVK with mainUser")
-    void registerBySbbolForKvk() {
-        // маин юзер для подключения Кредита в корзине
-        sberCRM.openSberCrmLoginPage();
-        sberCRM.buttonLogInSberBusinessId.click();
-        sbbol.loginSbbol(testUserInnLogin, testUserInnPassword);
-        sleep(5000);
-        sberCRM.navBarFormMarketPlace.click();
-        // нажатие на кнопку "Способы оплаты"
-        sberCRM.buttonPaymentMethods.click();
-        // выбор тикета "Рассрочка для бизнеса"
-        $(By.xpath("//p[contains(text(),'Рассрочка для бизнеса')]")).click();
-        $(By.xpath("//span[contains(text(),'Установить')]")).click();
-        sleep(1000);
-        refresh();
-        sleep(3000);
-        $(By.xpath("//span[contains(text(),'Отключить')]")).click();
-        refresh();
-        sleep(2000);
-        Selenide.closeWebDriver();
-        $(ByText.cssSelector("")).click();
-    }
-
-    @Test
     @DisplayName("Connect B2B with mainUser")
     void connectMp() {
         // маин юзер для подключения Моментальных платежей
@@ -165,6 +140,31 @@ public class NewTests {
         Selenide.clearBrowserCookies();
         Selenide.clearBrowserLocalStorage();
         Selenide.closeWebDriver();
+    }
+
+    @Test
+    @Disabled
+    @DisplayName("Connect and disconnect KVK with mainUser")
+    void registerBySbbolForKvk() {
+        // маин юзер для подключения Кредита в корзине
+        sberCRM.openSberCrmLoginPage();
+        sberCRM.buttonLogInSberBusinessId.click();
+        sbbol.loginSbbol(testUserInnLogin, testUserInnPassword);
+        sleep(5000);
+        sberCRM.navBarFormMarketPlace.click();
+        // нажатие на кнопку "Способы оплаты"
+        sberCRM.buttonPaymentMethods.click();
+        // выбор тикета "Рассрочка для бизнеса"
+        $(By.xpath("//p[contains(text(),'Рассрочка для бизнеса')]")).click();
+        $(By.xpath("//span[contains(text(),'Установить')]")).click();
+        sleep(1000);
+        refresh();
+        sleep(3000);
+        $(By.xpath("//span[contains(text(),'Отключить')]")).click();
+        refresh();
+        sleep(2000);
+        Selenide.closeWebDriver();
+        $(ByText.cssSelector("")).click();
     }
 
     @Test
