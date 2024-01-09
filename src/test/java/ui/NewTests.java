@@ -1,9 +1,7 @@
 package ui;
 
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
-import com.codeborne.selenide.selector.ByText;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
 import ui.config.ConfigForTests;
@@ -25,7 +23,8 @@ public class NewTests extends ConfigForTests {
 
 
     @Test
-    @DisplayName("remove the authorization agreement")
+    @Disabled
+    @DisplayName("001 remove the authorization agreement")
     void removeTheAuthorizationAgreement() {
 
         try {
@@ -33,16 +32,17 @@ public class NewTests extends ConfigForTests {
             sberCRM.openSberCrmLoginPage();
             sberCRM.buttonLogInSberBusinessId.click();
             sbbol.loginSbbol(testUserInnLogin, testUserInnPassword);
+            sleep(9000);
             sbbol.buttonAccept.click();
             sbbol.textFieldSmsCode.setValue("111111");
-        } catch (Exception e){
+        } catch (Exception e) {
             Selenide.closeWebDriver();
         }
-
     }
 
     @Test
-//    @Disabled
+    @DisplayName("002")
+    @Disabled
     void checkAddMP() {
         // НЕ маин юзер для подключения Моментальных платежей
         sberCRM.openSberCrmLoginPage();
@@ -66,7 +66,8 @@ public class NewTests extends ConfigForTests {
     }
 
     @Test
-    @DisplayName("Connect B2B with mainUser")
+    @Disabled
+    @DisplayName("003 Connect B2B with mainUser")
     void connectMp() {
         // маин юзер для подключения Моментальных платежей
         sberCRM.openSberCrmLoginPage();
@@ -88,23 +89,28 @@ public class NewTests extends ConfigForTests {
     }
 
     @Test
-    @DisplayName("Verification of link creation and account creation for Instant Payments service (MP)")
+    @DisplayName("004 Verification of link creation and account creation for Instant Payments service (MP)")
     void checkMpLink() {
 
         // С расчетного счета компании (10 000)
-
-        // Авторизация через СББОЛ
+        // подключение МП маин юзер для подключения Моментальных платежей
         sberCRM.openSberCrmLoginPage();
         sberCRM.buttonLogInSberBusinessId.click();
         sbbol.loginSbbol(testUserInnLogin, testUserInnPassword);
+        sleep(5000);
+        sberCRM.connectMp();
+        // закрыть окно с сервисами
+        sberCRM.buttonClosePaymentMethods.click();
 
+        // Авторизация через СББОЛ
+//        sberCRM.openSberCrmLoginPage();
+//        sberCRM.buttonLogInSberBusinessId.click();
+//        sbbol.loginSbbol(testUserInnLogin, testUserInnPassword);
         // открыть счет
         sberCRM.openInvoice();
-
         // создать счет
         sberCRM.creatingAnInvoiceForBus_Anar("10000");
         sleep(6000);
-
         // Создание ссылки на оплату
         $x("//span[contains(text(),'Ссылка на оплату')]").click();
         newUrl = $x("/html/body/div[3]/div[3]/div/form/div[1]/div/div/div[2]/a")
@@ -112,14 +118,12 @@ public class NewTests extends ConfigForTests {
                 .getOwnText();
         clearCashAndCookies();
         Selenide.closeWebDriver();
-
         // открытие ссылки
         // авторизация в СББОЛе плательщиком
         open(newUrl);
         sbbol.loginSbbol("bus-anar", "123456");
         sbbol.textFieldSmsCode.setValue("111111");
         sleep(10000);
-
         // создание платежного поручения
         $x("//*[contains(text(), 'Показать детали платежа')]").click();
         $x("//*[@data-test-id='paymentAmount__purpose--label']").shouldBe(Condition.visible);
@@ -132,16 +136,22 @@ public class NewTests extends ConfigForTests {
                 "переведён в статус \"Исполнен\"')]")
                 .shouldBe(Condition.visible)
                 .shouldHave(Condition.text("После положительного ответа банка документ будет переведён в статус \"Исполнен\""));
-        /*
-        или для проверки можно заменить предыдущую строку
-        $x("//*[@data-test-id='PaymentCreatorDetails__text']").shouldBe(Condition.visible);
-        */
+        clearCashAndCookies();
+        Selenide.closeWebDriver();
+
+        // отключение МП
+        sberCRM.openSberCrmLoginPage();
+        sberCRM.buttonLogInSberBusinessId.click();
+        sbbol.loginSbbol(testUserInnLogin, testUserInnPassword);
+        sleep(9000);
+        sberCRM.disconnectMp();
         clearCashAndCookies();
         Selenide.closeWebDriver();
     }
 
     @Test
-    @DisplayName("Connect KVK with mainUser")
+    @Disabled
+    @DisplayName("005 Connect KVK with mainUser")
     void ConnectKvk() {
         // маин юзер для подключения Кредита в корзине
         sberCRM.openSberCrmLoginPage();
@@ -166,23 +176,40 @@ public class NewTests extends ConfigForTests {
     }
 
     @Test
-    @DisplayName("Verification of link creation and account creation for Instant Payments service (KVK)")
+    @DisplayName("006 Verification of link creation and account creation for Instant Payments service (KVK)")
     void checkKvkLink() {
 
         // Текущий лимит для покупки в рассрочку (1 000 000)
-
-        // Авторизация через СББОЛ
+        // Подключить КВК
         sberCRM.openSberCrmLoginPage();
         sberCRM.buttonLogInSberBusinessId.click();
         sbbol.loginSbbol(testUserInnLogin, testUserInnPassword);
+        sleep(5000);
+        sberCRM.navBarFormMarketPlace.click();
+        // нажатие на кнопку "Способы оплаты"
+        sberCRM.buttonPaymentMethods.click();
+        // выбор тикета "Рассрочка для бизнеса"
+        sberCRM.buttonTicketKVK.click();
+        sberCRM.buttonConnect.click();
+        sleep(3000);
+        refresh();
+        sleep(3000);
+        $(By.xpath("//*[contains(text(),'Подключен')]"))
+                .shouldBe(Condition.visible)
+                .shouldHave(Condition.text("Подключен"));
+        // закрыть окно с сервисами
+        sberCRM.buttonClosePaymentMethods.click();
 
+
+        // Авторизация через СББОЛ
+//        sberCRM.openSberCrmLoginPage();
+//        sberCRM.buttonLogInSberBusinessId.click();
+//        sbbol.loginSbbol(testUserInnLogin, testUserInnPassword);
         // открыть счет
         sberCRM.openInvoice();
-
         // создать счет
         sberCRM.creatingAnInvoiceForBus_Anar("1 000 000");
         sleep(6000);
-
         // Создание ссылки на оплату
         $x("//span[contains(text(),'Ссылка на оплату')]").click();
         newUrl = $x("/html/body/div[3]/div[3]/div/form/div[1]/div/div/div[2]/a")
@@ -190,24 +217,20 @@ public class NewTests extends ConfigForTests {
                 .getOwnText();
         clearCashAndCookies();
         Selenide.closeWebDriver();
-
         // открытие ссылки
         // авторизация в СББОЛе плательщиком
         open(newUrl);
         sbbol.loginSbbol("bus-anar", "123456");
         sbbol.textFieldSmsCode.setValue("111111");
-        sleep(10000);
-
+        sleep(9000);
         // выбор тикета и создание платежного поручения
-
         $x("//*[@value='CREDIT_LIMIT']").click();
-        sberCRM.buttonOkForCookies.click();
+        $x("//*[@id=\"root\"]/div[3]/div/div[2]").click();
         $x("//*[@type='submit']").click();
-        sleep(6000);
-        $x("//*[@data-test-id='__requestOTP--button']").click();
-        sleep(2000);
+        $x("//*[@data-test-id='__requestOTP--button']")
+                .shouldHave(Condition.visible, Duration.ofSeconds(10000))
+                .click();
         $x("//*[@data-test-id='__otp--input']").setValue("11111").pressEnter();
-        sleep(2000);
         $x("//*[@data-test-id='PaymentCreatorDetails__title']").shouldBe(Condition.visible);
         $x("//*[contains(text(),'После положительного ответа банка документ будет " +
                 "переведён в статус \"Исполнен\"')]")
@@ -220,32 +243,20 @@ public class NewTests extends ConfigForTests {
         */
         clearCashAndCookies();
         Selenide.closeWebDriver();
-    }
 
-    @Test
-    @DisplayName("Disconnect B2B with mainUser")
-    void disconnectMp() {
-        // маин юзер для отключения Моментальных платежей
+        // Отключение сервиса КВК
         sberCRM.openSberCrmLoginPage();
         sberCRM.buttonLogInSberBusinessId.click();
         sbbol.loginSbbol(testUserInnLogin, testUserInnPassword);
         sleep(9000);
-        sberCRM.navBarFormMarketPlace.click();
-        sberCRM.buttonPaymentMethods.click();
-        sberCRM.buttonTicketB2B.click();
-        sberCRM.buttonDisconnect.click();
-        sleep(4000);
-        refresh();
-        sleep(6000);
-        $x("//*[contains(text(),'Установить')]")
-                .shouldBe(Condition.visible)
-                .shouldHave(Condition.text("Установить"));
+        sberCRM.disconnectMp();
         clearCashAndCookies();
         Selenide.closeWebDriver();
     }
 
     @Test
-    @DisplayName("Disconnect KVK with mainUser")
+    @Disabled
+    @DisplayName("008 Disconnect KVK with mainUser")
     void DisconnectKvk() {
         // маин юзер для подключения Кредита в корзине
         sberCRM.openSberCrmLoginPage();

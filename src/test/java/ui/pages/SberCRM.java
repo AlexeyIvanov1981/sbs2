@@ -4,13 +4,17 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
+import ui.config.ConfigForTests;
 
 import java.time.Duration;
 
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$x;
+import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Selenide.sleep;
 
 public class SberCRM {
+
+    SBBOL sbbol = new SBBOL();
+    ConfigForTests config = new ConfigForTests();
 
     private final String URL_IFT = "https://app-ift.sbercrm.com/#/login";
 
@@ -27,7 +31,8 @@ public class SberCRM {
             buttonConnect = $x("//span[contains(text(),'Установить')]"),
             buttonDisconnect = $(By.xpath("//*[contains(text(),'Отключить')]")),
             buttonOkForCookies = $x("//*[@class='jss93']"),
-            buttonTicketKVK = $(By.xpath("//p[contains(text(),'Рассрочка для бизнеса')]"));
+            buttonTicketKVK = $(By.xpath("//p[contains(text(),'Рассрочка для бизнеса')]")),
+            buttonClosePaymentMethods = $x("//*[@id='scrollContainer']/main/div/div/button");
 
     public void openMarketPlace() {
         navBarFormMarketPlace.click();
@@ -122,6 +127,52 @@ public class SberCRM {
                 .click();
         $(By.xpath("//span[contains(text(),'Счета')]")).click();
         $(By.xpath("//span[contains(text(),'Новая запись')]")).click();
+    }
+
+    public void disconnectMp() {
+        // маин юзер для отключения Моментальных платежей
+        navBarFormMarketPlace.click();
+        buttonPaymentMethods.click();
+        buttonTicketB2B.click();
+        buttonDisconnect.click();
+        sleep(4000);
+        refresh();
+        sleep(6000);
+        $x("//*[contains(text(),'Установить')]")
+                .shouldBe(Condition.visible)
+                .shouldHave(Condition.text("Установить"));
+        refresh();
+    }
+
+    public void ConnectKvk() {
+        // маин юзер для подключения Кредита в корзине
+        navBarFormMarketPlace.click();
+        // нажатие на кнопку "Способы оплаты"
+        buttonPaymentMethods.click();
+        // выбор тикета "Рассрочка для бизнеса"
+        buttonTicketKVK.click();
+        buttonConnect.click();
+        sleep(3000);
+        refresh();
+        sleep(3000);
+        $(By.xpath("//*[contains(text(),'Подключен')]"))
+                .shouldBe(Condition.visible)
+                .shouldHave(Condition.text("Подключен"));
+    }
+
+    public void connectMp() {
+        // маин юзер для подключения Моментальных платежей
+
+        openMarketPlace();
+        openPaymentMethods();
+        buttonTicketB2B.click();
+        buttonConnect.click();
+        sleep(3000);
+        refresh();
+        sleep(3000);
+        $(By.xpath("//*[contains(text(),'Подключен')]"))
+                .shouldBe(Condition.visible)
+                .shouldHave(Condition.text("Подключен"));
     }
 }
 

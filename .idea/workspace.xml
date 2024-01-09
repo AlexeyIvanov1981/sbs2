@@ -4,8 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7c3cf8f5-5030-4ad0-9c9b-480bb07277d9" name="Changes" comment="rename some tests">
-      <change afterPath="$PROJECT_DIR$/src/test/java/ui/config/ConfigForTests.java" afterDir="false" />
+    <list default="true" id="7c3cf8f5-5030-4ad0-9c9b-480bb07277d9" name="Changes" comment="added tests for KVK">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/ui/NewTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ui/NewTests.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/ui/pages/SberCRM.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ui/pages/SberCRM.java" afterDir="false" />
@@ -76,7 +75,30 @@
     &quot;settings.editor.selected.configurable&quot;: &quot;configurable.group.build&quot;
   }
 }</component>
-  <component name="RunManager" selected="Gradle.NewTests.removeTheAuthorizationAgreement">
+  <component name="RunManager" selected="Gradle.NewTests.checkMpLink">
+    <configuration name="NewTests" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;ui.NewTests&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
     <configuration name="NewTests.checkAddMP" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -123,7 +145,7 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="NewTests.registerBySbbolForMp" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="NewTests.checkMpLink" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -136,7 +158,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;ui.NewTests.registerBySbbolForMp&quot;" />
+            <option value="&quot;ui.NewTests.checkMpLink&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -169,36 +191,13 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="NewTests.turnOffBySbbolForMp" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-            <option value="--tests" />
-            <option value="&quot;ui.NewTests.turnOffBySbbolForMp&quot;" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.NewTests.removeTheAuthorizationAgreement" />
+        <item itemvalue="Gradle.NewTests.checkMpLink" />
         <item itemvalue="Gradle.NewTests.checkKvkLink" />
+        <item itemvalue="Gradle.NewTests" />
+        <item itemvalue="Gradle.NewTests.removeTheAuthorizationAgreement" />
         <item itemvalue="Gradle.NewTests.checkAddMP" />
-        <item itemvalue="Gradle.NewTests.turnOffBySbbolForMp" />
-        <item itemvalue="Gradle.NewTests.registerBySbbolForMp" />
       </list>
     </recent_temporary>
   </component>
@@ -358,7 +357,14 @@
       <option name="project" value="LOCAL" />
       <updated>1703830693427</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="added tests for KVK">
+      <created>1703836084257</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1703836084257</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -383,7 +389,8 @@
     <MESSAGE value="добавлено два теста в цепочку" />
     <MESSAGE value="добавлен тест removeTheAuthorizationAgreement" />
     <MESSAGE value="rename some tests" />
-    <option name="LAST_COMMIT_MESSAGE" value="rename some tests" />
+    <MESSAGE value="added tests for KVK" />
+    <option name="LAST_COMMIT_MESSAGE" value="added tests for KVK" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
