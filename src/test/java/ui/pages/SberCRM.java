@@ -27,6 +27,7 @@ public class SberCRM {
             buttonLogInSberBusinessId = $x("//span[contains(text(), 'Войти по СберБизнес ID')]"),
             navBarFormMarketPlace = $x("//*[@title='Маркетплейс']"),
             buttonPaymentMethods = $x("//*[contains(text(),'Способы оплаты')]"),
+            buttonManagementAndAccounting = $x("//*[contains(text(),'Управление и учет')]"),
             buttonTicketB2B = $x("//p[contains(text(),'Моментальные платежи B2B')]"),
             buttonConnect = $x("//span[contains(text(),'Установить')]"),
             buttonDisconnect = $(By.xpath("//*[contains(text(),'Отключить')]")),

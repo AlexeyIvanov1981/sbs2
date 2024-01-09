@@ -2,7 +2,9 @@ package ui;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import ui.config.ConfigForTests;
 import ui.pages.SBBOL;
@@ -16,29 +18,12 @@ public class NewTests extends ConfigForTests {
 
     String newUrl;
 
-    private final String testUserInnLogin = "test_user_inn3277300909_06";
-    private final String testUserInnPassword = "123456";
+    private final String TEST_USER_FOR_LOGIN_VIA_SBBOL = "test_user_inn3277300909_06";
+    private final String TEST_USER_PASSWORD_VIA_SBBOL = "123456";
+    private final String SMS_CODE_FOR_LOGIN_VIA_SBBOL = "11111";
     SBBOL sbbol = new SBBOL();
     SberCRM sberCRM = new SberCRM();
 
-
-    @Test
-    @Disabled
-    @DisplayName("001 remove the authorization agreement")
-    void removeTheAuthorizationAgreement() {
-
-        try {
-            // удаления соглашения для правильной работы остальных тестов БУДЕТ ЧАСТО ПАДАТЬ!!!!
-            sberCRM.openSberCrmLoginPage();
-            sberCRM.buttonLogInSberBusinessId.click();
-            sbbol.loginSbbol(testUserInnLogin, testUserInnPassword);
-            sleep(9000);
-            sbbol.buttonAccept.click();
-            sbbol.textFieldSmsCode.setValue("111111");
-        } catch (Exception e) {
-            Selenide.closeWebDriver();
-        }
-    }
 
     @Test
     @DisplayName("002")
@@ -66,29 +51,6 @@ public class NewTests extends ConfigForTests {
     }
 
     @Test
-    @Disabled
-    @DisplayName("003 Connect B2B with mainUser")
-    void connectMp() {
-        // маин юзер для подключения Моментальных платежей
-        sberCRM.openSberCrmLoginPage();
-        sberCRM.buttonLogInSberBusinessId.click();
-        sbbol.loginSbbol(testUserInnLogin, testUserInnPassword);
-        sleep(4000);
-        sberCRM.openMarketPlace();
-        sberCRM.openPaymentMethods();
-        sberCRM.buttonTicketB2B.click();
-        sberCRM.buttonConnect.click();
-        sleep(3000);
-        refresh();
-        sleep(3000);
-        $(By.xpath("//*[contains(text(),'Подключен')]"))
-                .shouldBe(Condition.visible)
-                .shouldHave(Condition.text("Подключен"));
-        clearCashAndCookies();
-        Selenide.closeWebDriver();
-    }
-
-    @Test
     @DisplayName("004 Verification of link creation and account creation for Instant Payments service (MP)")
     void checkMpLink() {
 
@@ -96,16 +58,11 @@ public class NewTests extends ConfigForTests {
         // подключение МП маин юзер для подключения Моментальных платежей
         sberCRM.openSberCrmLoginPage();
         sberCRM.buttonLogInSberBusinessId.click();
-        sbbol.loginSbbol(testUserInnLogin, testUserInnPassword);
+        sbbol.loginSbbol(TEST_USER_FOR_LOGIN_VIA_SBBOL, TEST_USER_PASSWORD_VIA_SBBOL);
         sleep(5000);
         sberCRM.connectMp();
         // закрыть окно с сервисами
         sberCRM.buttonClosePaymentMethods.click();
-
-        // Авторизация через СББОЛ
-//        sberCRM.openSberCrmLoginPage();
-//        sberCRM.buttonLogInSberBusinessId.click();
-//        sbbol.loginSbbol(testUserInnLogin, testUserInnPassword);
         // открыть счет
         sberCRM.openInvoice();
         // создать счет
@@ -122,14 +79,14 @@ public class NewTests extends ConfigForTests {
         // авторизация в СББОЛе плательщиком
         open(newUrl);
         sbbol.loginSbbol("bus-anar", "123456");
-        sbbol.textFieldSmsCode.setValue("111111");
+        sbbol.textFieldSmsCode.setValue(SMS_CODE_FOR_LOGIN_VIA_SBBOL);
         sleep(10000);
         // создание платежного поручения
         $x("//*[contains(text(), 'Показать детали платежа')]").click();
         $x("//*[@data-test-id='paymentAmount__purpose--label']").shouldBe(Condition.visible);
         $x("//*[@data-test-id='__requestOTP--button']").click();
         sleep(2000);
-        $x("//*[@data-test-id='__otp--input']").setValue("11111").pressEnter();
+        $x("//*[@data-test-id='__otp--input']").setValue(SMS_CODE_FOR_LOGIN_VIA_SBBOL).pressEnter();
         sleep(2000);
         $x("//*[@data-test-id='PaymentCreatorDetails__title']").shouldBe(Condition.visible);
         $x("//*[contains(text(),'После положительного ответа банка документ будет " +
@@ -138,41 +95,14 @@ public class NewTests extends ConfigForTests {
                 .shouldHave(Condition.text("После положительного ответа банка документ будет переведён в статус \"Исполнен\""));
         clearCashAndCookies();
         Selenide.closeWebDriver();
-
         // отключение МП
         sberCRM.openSberCrmLoginPage();
         sberCRM.buttonLogInSberBusinessId.click();
-        sbbol.loginSbbol(testUserInnLogin, testUserInnPassword);
+        sbbol.loginSbbol(TEST_USER_FOR_LOGIN_VIA_SBBOL, TEST_USER_PASSWORD_VIA_SBBOL);
         sleep(9000);
         sberCRM.disconnectMp();
         clearCashAndCookies();
         Selenide.closeWebDriver();
-    }
-
-    @Test
-    @Disabled
-    @DisplayName("005 Connect KVK with mainUser")
-    void ConnectKvk() {
-        // маин юзер для подключения Кредита в корзине
-        sberCRM.openSberCrmLoginPage();
-        sberCRM.buttonLogInSberBusinessId.click();
-        sbbol.loginSbbol(testUserInnLogin, testUserInnPassword);
-        sleep(5000);
-        sberCRM.navBarFormMarketPlace.click();
-        // нажатие на кнопку "Способы оплаты"
-        sberCRM.buttonPaymentMethods.click();
-        // выбор тикета "Рассрочка для бизнеса"
-        sberCRM.buttonTicketKVK.click();
-        sberCRM.buttonConnect.click();
-        sleep(3000);
-        refresh();
-        sleep(3000);
-        $(By.xpath("//*[contains(text(),'Подключен')]"))
-                .shouldBe(Condition.visible)
-                .shouldHave(Condition.text("Подключен"));
-        clearCashAndCookies();
-        Selenide.closeWebDriver();
-
     }
 
     @Test
@@ -183,7 +113,7 @@ public class NewTests extends ConfigForTests {
         // Подключить КВК
         sberCRM.openSberCrmLoginPage();
         sberCRM.buttonLogInSberBusinessId.click();
-        sbbol.loginSbbol(testUserInnLogin, testUserInnPassword);
+        sbbol.loginSbbol(TEST_USER_FOR_LOGIN_VIA_SBBOL, TEST_USER_PASSWORD_VIA_SBBOL);
         sleep(5000);
         sberCRM.navBarFormMarketPlace.click();
         // нажатие на кнопку "Способы оплаты"
@@ -199,16 +129,10 @@ public class NewTests extends ConfigForTests {
                 .shouldHave(Condition.text("Подключен"));
         // закрыть окно с сервисами
         sberCRM.buttonClosePaymentMethods.click();
-
-
-        // Авторизация через СББОЛ
-//        sberCRM.openSberCrmLoginPage();
-//        sberCRM.buttonLogInSberBusinessId.click();
-//        sbbol.loginSbbol(testUserInnLogin, testUserInnPassword);
         // открыть счет
         sberCRM.openInvoice();
         // создать счет
-        sberCRM.creatingAnInvoiceForBus_Anar("1 000 000");
+        sberCRM.creatingAnInvoiceForBus_Anar("1000000");
         sleep(6000);
         // Создание ссылки на оплату
         $x("//span[contains(text(),'Ссылка на оплату')]").click();
@@ -221,7 +145,7 @@ public class NewTests extends ConfigForTests {
         // авторизация в СББОЛе плательщиком
         open(newUrl);
         sbbol.loginSbbol("bus-anar", "123456");
-        sbbol.textFieldSmsCode.setValue("111111");
+        sbbol.textFieldSmsCode.setValue(SMS_CODE_FOR_LOGIN_VIA_SBBOL);
         sleep(9000);
         // выбор тикета и создание платежного поручения
         $x("//*[@value='CREDIT_LIMIT']").click();
@@ -230,24 +154,22 @@ public class NewTests extends ConfigForTests {
         $x("//*[@data-test-id='__requestOTP--button']")
                 .shouldHave(Condition.visible, Duration.ofSeconds(10000))
                 .click();
-        $x("//*[@data-test-id='__otp--input']").setValue("11111").pressEnter();
+        $x("//*[@data-test-id='__otp--input']").setValue(SMS_CODE_FOR_LOGIN_VIA_SBBOL).pressEnter();
         $x("//*[@data-test-id='PaymentCreatorDetails__title']").shouldBe(Condition.visible);
         $x("//*[contains(text(),'После положительного ответа банка документ будет " +
                 "переведён в статус \"Исполнен\"')]")
                 .shouldBe(Condition.visible)
                 .shouldHave(Condition.text("После положительного ответа банка документ будет переведён в статус \"Исполнен\""));
-
         /*
         или для проверки можно заменить предыдущую строку
         $x("//*[@data-test-id='PaymentCreatorDetails__text']").shouldBe(Condition.visible);
         */
         clearCashAndCookies();
         Selenide.closeWebDriver();
-
         // Отключение сервиса КВК
         sberCRM.openSberCrmLoginPage();
         sberCRM.buttonLogInSberBusinessId.click();
-        sbbol.loginSbbol(testUserInnLogin, testUserInnPassword);
+        sbbol.loginSbbol(TEST_USER_FOR_LOGIN_VIA_SBBOL, TEST_USER_PASSWORD_VIA_SBBOL);
         sleep(9000);
         sberCRM.disconnectMp();
         clearCashAndCookies();
@@ -255,26 +177,45 @@ public class NewTests extends ConfigForTests {
     }
 
     @Test
-    @Disabled
-    @DisplayName("008 Disconnect KVK with mainUser")
-    void DisconnectKvk() {
-        // маин юзер для подключения Кредита в корзине
+    @DisplayName("Проверка подключения сервиса Моментальные Платежи с подключением Договоры МэйнЮзер")
+        // Проверка подключения сервиса Моментальные Платежи с подключением Договоры МэйнЮзер
+    void CheckingConnectionOfMP_serviceWithoutConnectionContracts() {
         sberCRM.openSberCrmLoginPage();
         sberCRM.buttonLogInSberBusinessId.click();
-        sbbol.loginSbbol(testUserInnLogin, testUserInnPassword);
-        sleep(5000);
+        sbbol.loginSbbol(TEST_USER_FOR_LOGIN_VIA_SBBOL, TEST_USER_PASSWORD_VIA_SBBOL);
+        sleep(6000);
+        // подключение сервиса Договоры
         sberCRM.navBarFormMarketPlace.click();
-        // нажатие на кнопку "Способы оплаты"
+        // Установка ERP успешно выполнена. Необходимо обновить страницу.
+        sberCRM.buttonManagementAndAccounting.click();
+        sleep(3000);
+        $x("//*[contains(text(),'Сервис автоматизации бизнес-процессов компании')]").click();
+        sberCRM.buttonConnect.click();
+        $x("//*[contains(text(),'Установка ERP успешно выполнена. Необходимо обновить страницу.')]")
+                .shouldBe(Condition.visible);
+        sleep(5000);
+        refresh();
+        sberCRM.buttonClosePaymentMethods.click();
+        // Подключение МП
+        sberCRM.navBarFormMarketPlace.click();
         sberCRM.buttonPaymentMethods.click();
-        // выбор тикета "Рассрочка для бизнеса"
-        sberCRM.buttonTicketKVK.click();
+        sberCRM.buttonTicketB2B.click();
+        sberCRM.buttonConnect.click();
+        sleep(3000);
+        refresh();
+        // Отключение МП
         sberCRM.buttonDisconnect.click();
         refresh();
         sleep(3000);
-        $x("//*[contains(text(),'Установить')]")
-                .shouldBe(Condition.visible)
-                .shouldHave(Condition.text("Установить"));
-        clearCashAndCookies();
-        Selenide.closeWebDriver();
+        sberCRM.buttonClosePaymentMethods.click();
+        // Отключение Договоров
+        sberCRM.buttonManagementAndAccounting.click();
+        sleep(3000);
+        $x("//*[contains(text(),'Сервис автоматизации бизнес-процессов компании')]").click();
+        sberCRM.buttonDisconnect.click();
+        refresh();
+        sberCRM.buttonConnect.should(Condition.visible);
+        refresh();
+        sleep(3000);
     }
 }
