@@ -17,19 +17,17 @@ import static com.codeborne.selenide.Selenide.*;
 public class NewTests extends ConfigForTests {
 
     String newUrl;
-
     private final String TEST_USER_FOR_LOGIN_VIA_SBBOL = "test_user_inn3277300909_06";
     private final String TEST_USER_PASSWORD_VIA_SBBOL = "123456";
     private final String SMS_CODE_FOR_LOGIN_VIA_SBBOL = "11111";
     SBBOL sbbol = new SBBOL();
     SberCRM sberCRM = new SberCRM();
 
-
     @Test
     @DisplayName("002")
     @Disabled
     void checkAddMP() {
-        // НЕ маин юзер для подключения Моментальных платежей
+        // НЕ Маин юзер для подключения Моментальных платежей
         sberCRM.openSberCrmLoginPage();
         sleep(2000);
         sberCRM.fillUserName("aedivanov@sberbank.ru");
@@ -53,9 +51,8 @@ public class NewTests extends ConfigForTests {
     @Test
     @DisplayName("004 Verification of link creation and account creation for Instant Payments service (MP)")
     void checkMpLink() {
-
         // С расчетного счета компании (10 000)
-        // подключение МП маин юзер для подключения Моментальных платежей
+        // подключение МП Маин юзер для подключения Моментальных платежей
         sberCRM.openSberCrmLoginPage();
         sberCRM.buttonLogInSberBusinessId.click();
         sbbol.loginSbbol(TEST_USER_FOR_LOGIN_VIA_SBBOL, TEST_USER_PASSWORD_VIA_SBBOL);
@@ -108,7 +105,6 @@ public class NewTests extends ConfigForTests {
     @Test
     @DisplayName("006 Verification of link creation and account creation for Instant Payments service (KVK)")
     void checkKvkLink() {
-
         // Текущий лимит для покупки в рассрочку (1 000 000)
         // Подключить КВК
         sberCRM.openSberCrmLoginPage();
@@ -149,7 +145,7 @@ public class NewTests extends ConfigForTests {
         sleep(9000);
         // выбор тикета и создание платежного поручения
         $x("//*[@value='CREDIT_LIMIT']").click();
-        $x("//*[@id=\"root\"]/div[3]/div/div[2]").click();
+        $x("//*[@id='root']/div[3]/div/div[2]").click();
         $x("//*[@type='submit']").click();
         $x("//*[@data-test-id='__requestOTP--button']")
                 .shouldHave(Condition.visible, Duration.ofSeconds(10000))
@@ -177,25 +173,15 @@ public class NewTests extends ConfigForTests {
     }
 
     @Test
-    @DisplayName("Проверка подключения сервиса Моментальные Платежи с подключением Договоры МэйнЮзер")
-        // Проверка подключения сервиса Моментальные Платежи с подключением Договоры МэйнЮзер
+    @DisplayName("Проверка подключения сервиса Моментальные Платежи с подключением Договоры Майн Юзер")
+        // Проверка подключения сервиса Моментальные Платежи с подключением Договоры Майн Юзер
     void CheckingConnectionOfMP_serviceWithoutConnectionContracts() {
         sberCRM.openSberCrmLoginPage();
         sberCRM.buttonLogInSberBusinessId.click();
         sbbol.loginSbbol(TEST_USER_FOR_LOGIN_VIA_SBBOL, TEST_USER_PASSWORD_VIA_SBBOL);
         sleep(6000);
         // подключение сервиса Договоры
-        sberCRM.navBarFormMarketPlace.click();
-        // Установка ERP успешно выполнена. Необходимо обновить страницу.
-        sberCRM.buttonManagementAndAccounting.click();
-        sleep(3000);
-        $x("//*[contains(text(),'Сервис автоматизации бизнес-процессов компании')]").click();
-        sberCRM.buttonConnect.click();
-        $x("//*[contains(text(),'Установка ERP успешно выполнена. Необходимо обновить страницу.')]")
-                .shouldBe(Condition.visible);
-        sleep(5000);
-        refresh();
-        sberCRM.buttonClosePaymentMethods.click();
+        sberCRM.connectContracts();
         // Подключение МП
         sberCRM.navBarFormMarketPlace.click();
         sberCRM.buttonPaymentMethods.click();
@@ -206,16 +192,8 @@ public class NewTests extends ConfigForTests {
         // Отключение МП
         sberCRM.buttonDisconnect.click();
         refresh();
-        sleep(3000);
         sberCRM.buttonClosePaymentMethods.click();
         // Отключение Договоров
-        sberCRM.buttonManagementAndAccounting.click();
-        sleep(3000);
-        $x("//*[contains(text(),'Сервис автоматизации бизнес-процессов компании')]").click();
-        sberCRM.buttonDisconnect.click();
-        refresh();
-        sberCRM.buttonConnect.should(Condition.visible);
-        refresh();
-        sleep(3000);
+        sberCRM.disconnectContracts();
     }
 }

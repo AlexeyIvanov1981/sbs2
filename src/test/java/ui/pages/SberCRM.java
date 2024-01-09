@@ -9,12 +9,8 @@ import ui.config.ConfigForTests;
 import java.time.Duration;
 
 import static com.codeborne.selenide.Selenide.*;
-import static com.codeborne.selenide.Selenide.sleep;
 
 public class SberCRM {
-
-    SBBOL sbbol = new SBBOL();
-    ConfigForTests config = new ConfigForTests();
 
     private final String URL_IFT = "https://app-ift.sbercrm.com/#/login";
 
@@ -46,7 +42,6 @@ public class SberCRM {
     public void openSberCrmLoginPage() {
         Selenide.open(URL_IFT);
         buttonOkForCookies.shouldBe(Condition.visible, Duration.ofSeconds(8000)).click();
-
     }
 
     public void fillUserName(String userName) {
@@ -131,9 +126,9 @@ public class SberCRM {
     }
 
     public void disconnectMp() {
-        // маин юзер для отключения Моментальных платежей
-        navBarFormMarketPlace.click();
-        buttonPaymentMethods.click();
+        // Маин юзер для отключения Моментальных платежей
+        openMarketPlace();
+        openPaymentMethods();
         buttonTicketB2B.click();
         buttonDisconnect.click();
         sleep(4000);
@@ -143,13 +138,14 @@ public class SberCRM {
                 .shouldBe(Condition.visible)
                 .shouldHave(Condition.text("Установить"));
         refresh();
+        buttonClosePaymentMethods.click();
     }
 
     public void ConnectKvk() {
-        // маин юзер для подключения Кредита в корзине
-        navBarFormMarketPlace.click();
+        // Маин юзер для подключения Кредита в корзине
+        openMarketPlace();
         // нажатие на кнопку "Способы оплаты"
-        buttonPaymentMethods.click();
+        openPaymentMethods();
         // выбор тикета "Рассрочка для бизнеса"
         buttonTicketKVK.click();
         buttonConnect.click();
@@ -159,11 +155,11 @@ public class SberCRM {
         $(By.xpath("//*[contains(text(),'Подключен')]"))
                 .shouldBe(Condition.visible)
                 .shouldHave(Condition.text("Подключен"));
+        buttonClosePaymentMethods.click();
     }
 
     public void connectMp() {
-        // маин юзер для подключения Моментальных платежей
-
+        // Маин юзер для подключения Моментальных платежей
         openMarketPlace();
         openPaymentMethods();
         buttonTicketB2B.click();
@@ -174,6 +170,31 @@ public class SberCRM {
         $(By.xpath("//*[contains(text(),'Подключен')]"))
                 .shouldBe(Condition.visible)
                 .shouldHave(Condition.text("Подключен"));
+        buttonClosePaymentMethods.click();
+    }
+
+    public void connectContracts() {
+        openMarketPlace();
+        buttonManagementAndAccounting.click();
+        sleep(3000);
+        $x("//*[contains(text(),'Сервис автоматизации бизнес-процессов компании')]").click();
+        buttonConnect.click();
+        $x("//*[contains(text(),'Установка ERP успешно выполнена. Необходимо обновить страницу.')]")
+                .shouldBe(Condition.visible);
+        sleep(3000);
+        refresh();
+        buttonClosePaymentMethods.click();
+    }
+
+    public void disconnectContracts() {
+        openMarketPlace();
+        buttonManagementAndAccounting.click();
+        $x("//*[contains(text(),'Сервис автоматизации бизнес-процессов компании')]").click();
+        buttonDisconnect.click();
+        refresh();
+        buttonConnect.should(Condition.visible);
+        sleep(2000);
+        buttonClosePaymentMethods.click();
     }
 }
 

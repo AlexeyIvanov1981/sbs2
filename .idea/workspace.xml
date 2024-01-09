@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7c3cf8f5-5030-4ad0-9c9b-480bb07277d9" name="Changes" comment="added tests for KVK">
+    <list default="true" id="7c3cf8f5-5030-4ad0-9c9b-480bb07277d9" name="Changes" comment="добавлен тест для проверки подключения сервисов с включеным сервисом Договор">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/ui/NewTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ui/NewTests.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/ui/pages/SberCRM.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ui/pages/SberCRM.java" afterDir="false" />
@@ -380,7 +380,15 @@
       <option name="project" value="LOCAL" />
       <updated>1703836084257</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="добавлен тест для проверки подключения сервисов с включеным сервисом Договор">
+      <option name="closed" value="true" />
+      <created>1704802871510</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1704802871510</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -406,7 +414,8 @@
     <MESSAGE value="добавлен тест removeTheAuthorizationAgreement" />
     <MESSAGE value="rename some tests" />
     <MESSAGE value="added tests for KVK" />
-    <option name="LAST_COMMIT_MESSAGE" value="added tests for KVK" />
+    <MESSAGE value="добавлен тест для проверки подключения сервисов с включеным сервисом Договор" />
+    <option name="LAST_COMMIT_MESSAGE" value="добавлен тест для проверки подключения сервисов с включеным сервисом Договор" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
